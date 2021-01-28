@@ -1,0 +1,14 @@
+
+public class Manager extends Engineer {
+	protected int id;
+	protected int managerID;
+	protected int name;
+	public Manager(String empName, int empId, int managerID) {
+		super(name);
+		this.id = id;
+		this.managerID = managerID;
+	}
+	public handleCrisis{
+		
+	}
+}

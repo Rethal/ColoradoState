@@ -1,0 +1,71 @@
+import java.util.ArrayList;
+
+public class Stack implements StackIF {
+
+	// This class implements the provided Stack Interface StackIF
+
+	// Use opStack to push and pop operators
+	private ArrayList<String> opStack;
+
+	// debug controls debug reporting 
+	private boolean debug;
+
+	// intialize opStack and debug
+	public Stack(boolean debug){
+		this.opStack = opStack;
+		this.debug = debug;
+	}
+
+
+	public static void main(String[] args) throws StackException{
+		Stack s = new Stack(false);
+		s.pop();
+	}
+
+
+	@Override
+	public void push(String op) {
+		// TODO Auto-generated method stub
+		if(debug){
+			System.out.println("push: "+op);
+		}
+		opStack.add(op);// = i;
+	}
+
+
+	@Override
+	public String pop() throws StackException {
+		// TODO Auto-generated method stub
+		if(opStack.isEmpty()){
+			throw new StackException("popping from empty stack!");
+		}
+		if(debug){
+			String op = opStack.get(opStack.size()-1);
+			System.out.println("pop: "+op);
+		}
+		String op = opStack.get(opStack.size()-1);
+		opStack.remove(opStack.size()-1);
+		return op;
+	}
+
+
+	@Override
+	public String peek() throws StackException {
+		// TODO Auto-generated method stub
+		if(!opStack.isEmpty()){
+			String op = opStack.get(opStack.size()-1);
+			return op;
+		}
+		else return "peeking empty stack!";
+	}
+
+
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		if(opStack.isEmpty()){
+			return true;
+		}
+		return false;
+	}
+}

@@ -1,0 +1,7 @@
+Filesystem                                        1K-blocks       Used Available Use% Mounted on
+/dev/sda1                                          16508572    2519680  13150304  17% /
+udev                                                2015872         52   2015820   1% /dev
+tmpfs                                                404936        288    404648   1% /run
+none                                                   5120          0      5120   0% /run/lock
+none                                                2024660          0   2024660   0% /run/shm
+users.isi.deterlab.net:/mnt/other/users/cos356bf 2031313216 1735656128 133152000  93% /users/cos356bf

@@ -1,0 +1,19 @@
+import java.util.Random;
+
+
+public class Engineer extends Employee{
+	protected int id;
+	protected int managerID;
+	protected int name;
+	public Engineer(String name, int id, int managerID) {
+		super(name);
+		this.id = id;
+                this.managerID = managerID;
+	}
+	  Random crisisGen = new Random();
+	  if (crisisGen.nextInt(10) == 0) {
+	      //it's a crisis!
+	  } else {
+	      //everything is OK!
+	  }
+}

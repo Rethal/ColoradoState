@@ -1,0 +1,102 @@
+import java.text.DecimalFormat;
+import java.util.Arrays;
+
+public class Student implements StudentIF{
+
+	private String name;
+	private int id;
+	private int[] grades;
+	private int numGrades;
+	private int totalGrades;
+
+	// The constructor
+	//    initializes the instance variables  
+	//    name, id, grades = new int[totalGrades], and numGrades = 0;
+	public Student (String name, int id, int totalGrades){
+		// System.out.println("Constructor not implemented");
+		this.name = name;
+		this.id = id;
+		this.numGrades = 0;
+		this.grades = new int[totalGrades];
+		this.totalGrades = totalGrades;
+
+	}
+
+	public String toString() {
+		String res = name + "\t" + id + " ";
+		for (int i=0; i < totalGrades; i++) {
+			res += " " + grades[i];
+		}
+		res += "\tscore: " + new DecimalFormat("0.00").format(computeScore());
+		return res;
+	}
+
+	public double computeScore(){
+		double total = 0;
+		for (int i=0; i<totalGrades; i++){
+			total = total+grades[i];
+		}
+		total = total/totalGrades;
+		return total;
+	}
+
+	public boolean addGrade (int newGrade){
+		if(numGrades<totalGrades){
+			grades[numGrades] = newGrade;
+			numGrades++;
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	public boolean equals(StudentIF o){
+		if(o instanceof Student){
+			Student stud = (Student)o;
+			int ID = stud.getId();
+			int id = this.id;
+			if(id==ID){
+				return true;
+			}
+			else return false;
+		}
+		else return false;
+	}
+
+	// compareTo public int compareTo(Student other) 
+	// is defined in the Comparable Interface
+	// and should compare the student ID's  (they are positive integers).
+	// Must be able to handle null "other" students. A null student should be
+	// ordered before any student s so the s.compareTo(null) should be positive.
+
+	@Override
+	public int compareTo(StudentIF o) {
+		if(o instanceof Student){
+			Student stud = (Student)o;
+			int ID = stud.getId();
+			int id = this.id;
+			if(ID>id){
+				return -1;
+			}
+			else if(ID==id){
+				return 0;
+			}
+			else return 1;
+		}
+		else return 1;
+	}
+
+	@Override
+	public String getName() {
+		String Name = this.name;
+		return Name;
+	}
+
+	@Override
+	public int getId() {
+		int ID = this.id;
+		return ID;
+	}
+
+}
+

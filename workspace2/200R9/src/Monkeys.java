@@ -1,0 +1,85 @@
+import java.util.Arrays;
+
+
+public class Monkeys {
+
+	private long count;
+	private int n; 
+	private int[] array;
+	
+	public Monkeys(int n){
+		this.n =  n;
+		this.count = 0;
+		makeArray();
+	}
+	
+	private void swap(int[] array, int i, int j){
+		int t = array[i];
+		array[i]=array[j];
+		array[j]=t;
+	}
+	
+	public void monkeys(int [] array, int i, int j){
+		count++;  // count method calls
+		if(i<j) {
+			// size 2 base case 
+			if(j-i==1){
+				if (array[i] > array[j]) swap(array,i,j);
+			}
+			else {
+				int third = (j-i+1)/3;
+				monkeys(array, i, j-third); // 2/3 n size problem
+				monkeys(array, i+third, j); // 2/3 n size problem
+				monkeys(array, i, j-third); // 2/3 n size problem
+			}
+		}
+	}
+
+	public void monkeys() {
+		monkeys(array, 0, array.length-1);
+	} 
+	
+	public void makeArray(){
+		this.array = new int[n];
+		for(int i=0; i<n; i++)
+			array[i] = n-i;
+	}
+	
+	public String toString(){
+		String r = "n: " + n + ", count: " + count ;
+		if(n<50)
+			r += "\narray: "+Arrays.toString(array);
+		return r;
+	}
+	
+	public static void doTheMonkey(int n){
+		Monkeys m = new Monkeys(n);
+		System.out.println(m);		
+		m.monkeys();
+		System.out.println(m);		
+	}
+	
+	public static void main(String[] args){
+		// Do you see what it does? How it does it?
+		// How complex does it get?
+        for(int i = 1; i<6; i+=1)
+        	doTheMonkey(i);
+
+		// How complex does it get?
+        for(int i = 100; i<600; i+=100)
+        	doTheMonkey(i);
+	}
+}
+//m.monkeys() calls monkeys using Monkeys. monkeys passes this.array, 0, and this.array.length-1 into
+//the more advanced monkeys, where count increases; if i is less than j, if they're one apart, if array at
+//location i is greater than array at location j, the two positions are swapped, inverting the array.  
+//But if they're more than
+//one apart, it calls the advanced monkeys again with array, 0, and j - (j-i+1)/3; array, (j-i+1)/3, and j;
+//and array, 0, j-(j-i+1)/3.  For the next call, the 0s are replaced with (j-i+1)/3 in the center call,
+//but i never changes in the outer calls.  All of these functions call until j and i meet
+//count increases by 3x+1; the array increases by 1 each time
+//f(n)=a f(n/b) + c(n^d)
+//if n/b = 2/3 (because of the 2/3 n size problem) then b = 3/2
+//3n+1 means that a = 2 and d = 0 and c = 1 and is the count
+//a = 2 > (3/2)^0 therefore the complexity can be described as O(n^log base b of a) which is
+//O(n^(log3/2(3))) which is between O(n^2) and O(n^3)

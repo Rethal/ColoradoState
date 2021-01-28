@@ -1,0 +1,90 @@
+//Main Header by Brent Grundman
+//CS253
+//829460164
+#ifndef STICK_FIGURE
+#define STICK_FIGURE
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <PoseDisplay.h>
+#include <Point3D.h>
+#include <cmath>
+#include <Distance.h>
+#include <cfloat>
+using namespace std; 
+
+//bool bySpecificPoint(const vector<Point3D>& A, const vector<Point3D>& B);
+//bool isHigher(const vector<Point3D>& A);
+
+class stick {
+public:
+	
+	stick(ifstream& inFile, string outFile = "") {
+		legalFile(inFile);
+		//unscaledLegalFile(inFile);
+	};
+	stick(ifstream& inFile, string transform, double num, string outFile = "") {
+		unscaledLegalFile(inFile);
+	};
+	stick(const stick& inStick, int lastFrame, int firstFrame = 0) {
+		timeVector.clear();
+		for (int i = firstFrame; i < lastFrame; i++) {
+			timeVector.push_back(inStick.timeVector[i]);
+		}
+		//selfSplit(inStick, lastFrame, firstFrame);
+	};
+
+
+	int changePoses(string transform, double num);
+	int posesPrint(string outfile);
+	//int filePose(PoseDisplay& pose, ifstream& inFile);
+	//int fileDistPrint(ifstream& inFile, string outFile);
+	/*string getOut(){ return OUTFILE; };
+	ifstream getIn(){ return INFILE; };*/
+	//ifstream INFILE;
+	//string OUTFILE;
+	vector<vector<Point3D>> timeVector;
+
+	int selfSplit(const stick& inStick, int lastFrame, int firstFrame = 0);
+	int legalFile(ifstream& inFile);
+	int unscaledLegalFile(ifstream& inFile);
+	int checkLine(istringstream& iss, int lineCount);
+	double findSpineX();
+	double findSpineY();
+	double findSpineZ();
+	void shiftVector(double shift, vector<double>& values);
+	int makePoses();
+	double greatestAbs();
+	bool sameLems();
+	int scaleVector(double scale, vector<double>& values);
+	//void newBase();
+	//int comparePoses();
+	bool openOutFile(string outFile);
+	bool writeDistance();
+	double poseVectorCompare(const vector<Point3D>& poseVectorShort, const vector<Point3D>& poseVectorLong);
+
+	vector<double> SpineX;
+	vector<double> SpineY;
+	vector<double> SpineZ;
+	vector<double> allX;
+	vector<double> allY;
+	vector<double> allZ;
+	vector<double> poseDistances;
+
+
+	//int comparePosesMulti(const stick& StickShort, const stick& StickLong, string distanceType = "");
+	////bool openOutFileMulti(string outFile);
+	////bool writeDistanceMulti();
+	////int fileDistPrintMulti(const stick& firstIn, const stick& secondIn, string outFile);
+	//
+	//int dynamicMatch(const stick& firstIn, const stick& secondIn, string distanceType = "");
+	//double recursiveMatch(const vector<vector<double>>& distMatrix, int i = -1, int base = 0);
+
+	//vector<vector<double>> fileDistances;
+
+
+//protected:
+	
+	
+};
+#endif

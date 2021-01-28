@@ -1,0 +1,106 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+public class Postfix {
+
+	// use evalStack for the evaluation of the postfix expression in line
+	// implement evalStack with the pop and push methods
+	private ArrayList<Integer> evalStack = new ArrayList<Integer>();
+
+	// when scanning a next Token, put it in nextToken
+	private String nextToken;
+
+	// scLine is the scanner that gets the input line
+	private Scanner scLine;
+
+	// debug is used to report progress
+	private boolean debug;
+
+	/* constructor
+	 * set instance variable debug
+	 * create new scanner with String line and assign to scLine
+	 */
+	public Postfix(String line, boolean debug){
+		this.debug = debug;
+		scLine = new Scanner(line);
+	}
+
+
+	/*
+	 * push Integer i on evalStack
+	 * In debug mode print "push: " + pushed value
+	 */
+	private void push(Integer i){
+		if(debug){
+			System.out.println("push: "+i);
+		}
+		evalStack.add(i);// = i;
+	}
+
+	/*
+	 * pop Integer from evalStack
+	 * If evalStack empty, return null
+	 * In debug mode print "pop: " + popped value
+	 */
+	private Integer pop(){
+		if(!evalStack.isEmpty()){
+			if(debug){
+				int i = evalStack.get(evalStack.size()-1);
+				System.out.println("pop :"+i);
+			}
+			int i = evalStack.get(evalStack.size()-1);
+			evalStack.remove(evalStack.size()-1);
+			return i;
+		}
+		else return null;
+	}
+
+
+	/*
+	 * evaluate the postfix expression in scLine
+	 * when encountering an Integer, push it on the evalStack
+	 * when encountering an operator, 
+	 *    pop two values off the evalStack (right, then left)
+	 *    perform the operation, and push the result on the evalStack
+	 * at the end of the expression,
+	 *    pop the result off the stack and return it 
+	 *    
+	 * scLine either contains an empty line, or a valid postfix expression     
+	 */
+	public Integer eval(){
+		while(scLine.hasNext()){
+			if(scLine.hasNextInt()){
+				nextToken=scLine.next();
+				int i = Integer.parseInt(nextToken);
+				this.push(i);
+			}
+			else{
+				nextToken=scLine.next();
+			}
+			if(nextToken.contentEquals("*")||nextToken.contentEquals("-")||nextToken.contentEquals("+")||nextToken.contentEquals("/")){
+				int a = this.pop();
+				int b = this.pop();
+				int c = 0;
+				if(nextToken.contentEquals("*")){
+					c = b*a;
+				}
+				if(nextToken.contentEquals("+")){
+					c = b+a;
+				}
+				if(nextToken.contentEquals("/")){
+					c = b/a;
+				}
+				if(nextToken.contentEquals("-")){
+					c = b-a;
+				}
+				this.push(c);
+			}
+		}
+		if(!evalStack.isEmpty()){
+			int a = this.pop();
+			return a;
+		}
+		else return null;
+	}
+}

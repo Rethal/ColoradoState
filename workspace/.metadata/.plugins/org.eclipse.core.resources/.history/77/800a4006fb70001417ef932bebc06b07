@@ -1,0 +1,67 @@
+import java.text.DecimalFormat;
+
+public class Student{
+
+	private String name;
+	private int id;
+	private int[] grades;
+	private int numGrades;
+	private int totalGrades;
+
+	// The constructor
+	//    initializes the instance variables  
+	//    name, id, grades = new int[totalGrades], and numGrades = 0;
+	public Student (String name, int id, int totalGrades){
+      // System.out.println("Constructor not implemented");
+		this.name = name;
+		this.id = id;
+		this.numGrades = 0;
+		this.grades = new int[totalGrades];
+		this.totalGrades = totalGrades;
+		
+	}
+
+	public String toString() {
+		String res = name + "\t" + id + " ";
+		for (int i=0; i < totalGrades; i++) {
+			res += " " + grades[i];
+		}
+		res += "\tscore: " + new DecimalFormat("0.00").format(computeScore());
+		return res;
+	}
+	
+	public double computeScore(){
+		int total = 0;
+		for (int i=0; i<totalGrades; i++){
+			total = total+grades[i];
+		}
+		total = total/totalGrades;
+		return total;
+	}
+	
+	public String getName(StudentIF other){
+		String Name = other.getName();
+		return Name;
+	}
+	public int getId(StudentIF other){
+		int ID = other.getId();
+		return ID;
+	}
+	public boolean addGrade (int newGrade){
+		for(int i=0; i<totalGrades; i++){
+			
+		}
+	}
+	public boolean equals(StudentIF other){
+		int ID = other.getId();
+		if(this.id==ID){
+			return true;
+		}
+		else return false;
+	}
+	public int compareTo(Student other){
+		
+	}
+
+}
+

@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<struct>
+
+typedef struct Node{
+  char* last;
+  char* first;
+  float GPA;
+  struct Node *next;
+} tNode,*pNode;
+
+pNode insert(pNode list,pNode node);
+pNode delete(pNode list,char *last);
+void print(pNode list);
+void freelist(pNode *list);
+
+pNode createnode(char *last,char *first, float GPA);
+void freenode(pNode node);
+
+pNode read_data
+main()
+{
+  FILE *f; 
+  f=fopen("data.txt","r");
+  fscanf;
+  freelist;
+}
+

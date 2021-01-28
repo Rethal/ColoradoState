@@ -1,0 +1,168 @@
+
+import java.util.Iterator;
+
+
+public class TokenIter implements Iterator<String>{
+
+	//input line to be tokenized
+	private String line;
+
+	// the next Token, null if no next Token
+	private String nextToken = " ";
+	int loc = 0;
+
+	public TokenIter(String line){
+		this.line = line;
+	}
+
+
+	@Override
+	// implement
+	public boolean hasNext() {
+		// TODO Auto-generated method stub
+		//		if(loc<line.length()){
+		//			return true;
+		//		}
+		//		return false;
+		String word = "";
+		if(loc==line.length()){
+			return false;
+		}
+		if(line==""){
+			return false;
+		}
+		if(line.charAt(loc)==' '){
+			while(line.charAt(loc)==' '){
+				loc++;
+				if(loc==line.length()){
+					return false;
+				}	
+			}
+		}
+		//added in =
+		if ((line.charAt(loc)=='('||line.charAt(loc)==')'||line.charAt(loc)=='=')){
+			word += line.charAt(loc);
+			loc++;
+			nextToken = word;
+			return true;
+		}
+		if(loc<line.length()){
+			while(line.charAt(loc)!='('&&line.charAt(loc)!=')'&&loc<line.length()){
+				word += line.charAt(loc);
+				//new if statement
+				if(!Character.isLetter(word.charAt(0))){
+					loc++;
+					while(line.charAt(loc)!=' ' && loc<line.length()){
+						loc++;
+					}
+					word = "";
+				}
+				if(loc<line.length()){
+					loc++;
+					if(loc==line.length()){
+						nextToken = word;
+						return true;
+					}
+				}
+				//OLD CODE FOR ONLY THESE TOKENS
+				//				if(word.equals("true")||word.equals("false")||word.equals("and")||word.equals("or")
+				//						||word.equals("not")){
+				//					nextToken = word;
+				//					return true;
+				//				}
+				if(loc<line.length()&&line.charAt(loc)==' '){
+					if(loc==line.length()){
+						return false;
+					}
+					if(Character.isLetter(line.charAt(loc-1))){
+						nextToken = word;
+						return true;
+					}
+					else{
+						loc++;
+						if(loc==line.length()){
+							return false;
+						}
+					}
+					nextToken="";
+					if (line.charAt(loc)=='('||line.charAt(loc)==')'){
+						word = "" + line.charAt(loc);
+						if (loc<line.length()){
+							loc++;
+						}
+						nextToken = word;
+						return true;
+					}
+				}
+				//new code
+				if(Character.isLetter(line.charAt(loc-1))){
+					while(loc<line.length()&&Character.isLetterOrDigit(line.charAt(loc))){
+						//while(line.charAt(loc)!=' '){
+						word += line.charAt(loc);
+						if(loc<line.length()){
+							loc++;
+						}
+						if(loc==line.length()){
+							nextToken = word;
+							return true;
+						}
+					}
+					if(loc<line.length()&&(line.charAt(loc)==' '||line.charAt(loc)=='('||line.charAt(loc)==')')){
+						if(word.equals("true")||word.equals("false")||word.equals("and")||word.equals("or")
+								||word.equals("not")){
+							nextToken = word;
+							return true;
+						}
+						else{
+							//FLAWED
+							//						for(int i=0;i<word.length();i++){
+							//							if(!Character.isLetterOrDigit(word.charAt(i))){
+							//								word = "";
+							//							}
+							//						}
+							nextToken = word;
+							return true;
+						}
+					}
+					else{
+						word = "";
+					}
+				}
+				//end new code
+			}
+		}
+		return false;
+	}
+
+	@Override
+	//implement
+	public String next() {
+		//		 TODO Auto-generated method stub
+		return nextToken;
+	}
+
+	@Override
+	// provided, do not change
+	public void remove() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	// provided
+	public static void main(String[] args){
+		String line;
+		// you can play with other inputs on the command line
+		if(args.length>0)
+			line = args[0];
+		// or do the standard test
+		else
+//			line = " not BAD (true or false) && notgood a1 = 1a1a 1a a1&& 1a &aaa 1aaa a a ";
+			line = "s = (m1 or h2) and r";
+		System.out.println("line: [" + line + "]");
+		TokenIter tokIt = new TokenIter(line);
+		while(tokIt.hasNext()){
+			System.out.println("next token: [" + tokIt.next() + "]");
+		}
+	}
+}
+

@@ -1,0 +1,82 @@
+
+public class RecursiveLinkedList {
+
+    private Node head;
+    private int size;
+    
+    public RecursiveLinkedList(){
+        head = null;
+        size = 0;
+    }
+
+    public void clear() {
+        head = null;
+    }
+    
+    public void add(Object item) {
+        head = addRecursive(head, item);
+        size++;
+    }
+    
+    private Node addRecursive(Node node, Object item) {
+
+        // complete this method
+        return node;
+    } 
+    
+    public void add(Object item, int index) {
+        head = addRecursive(head, item, index, 0);
+        size++;
+    }
+
+    private Node addRecursive(Node node, Object item, int index, int currentIndex) {
+
+        // complete this method
+        return node;
+    } 
+    
+    public void remove(int index){
+        head = removeRecursive(head, index, 0);
+        size--;
+    }
+    
+    private Node removeRecursive(Node node, int index, int currentIndex) {
+        // complete this method
+
+        return node;
+    } 
+    
+    public int size() {
+        return size;
+    }
+    
+    public boolean isEmpty() {
+        return size == 0;
+    }
+    
+    public String toString(){
+        // complete this method using a recursive helper method
+        return "";
+    }
+    
+    public static void main(String[] args) {
+
+        RecursiveLinkedList list = new RecursiveLinkedList();
+        //list.add("Jane");
+        list.add("Jane", 0);
+        System.out.println(list);
+        list.add("John");
+        System.out.println(list);
+        list.add("Jess");
+        System.out.println(list);
+        list.add("Jeremy", 1);
+        System.out.println(list);
+        
+        list.remove(2);
+        System.out.println(list);
+        list.remove(2);
+        System.out.println(list);
+  
+    }
+
+}

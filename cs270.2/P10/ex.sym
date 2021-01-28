@@ -1,0 +1,21 @@
+// Symbol table
+// Scope level 0:
+//	Symbol Name       Page Address
+//	----------------  ------------
+//	PRINT             3009
+//	DONE              3028
+//	ISDIGIT           3035
+//	BODY              300E
+//	PARAM             3001
+//	DIVIDE            3041
+//	EXIT              3050
+//	LOOP              304C
+//	MAIN              3002
+//	LETTER            3059
+//	DIGIT             3058
+//	OUTPUT            302D
+//	DENOM             3057
+//	CONTINUE          303C
+//	SIXTEEN           3056
+//	ISLETTER          3039
+//	STACK             305A

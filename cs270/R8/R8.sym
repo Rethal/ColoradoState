@@ -1,0 +1,14 @@
+// Symbol table
+// Scope level 0:
+//	Symbol Name       Page Address
+//	----------------  ------------
+//	Param             3002
+//	Result            3003
+//	One               3004
+//	Eight             3005
+//	Mask              3006
+//	mirror            3007
+//	Shift1            300E
+//	Shift3            3012
+//	Shift2            3015
+

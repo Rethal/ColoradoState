@@ -1,0 +1,24 @@
+
+public class XcelStudent extends Student {
+	String projectGrade = "";
+
+	public XcelStudent(String name, int id, int totalGrades, String projectGrade){
+		super(name, id, totalGrades);
+		this.projectGrade = projectGrade;
+	}
+
+	public double computeScore(String pGrade){
+		double total = computeScore();
+		if(pGrade == "A"){
+			return total+3;
+		}
+		else if(pGrade == "B"){
+			return total+2;
+		}
+		else if(pGrade == "C"){
+			return total+1;
+		}
+		else return total;
+	}
+	
+}

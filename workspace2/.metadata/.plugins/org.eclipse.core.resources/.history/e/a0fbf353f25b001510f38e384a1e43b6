@@ -1,0 +1,143 @@
+
+
+import java.util.Scanner;
+
+/* 
+ * Class for parsing (recognizing) simple prefix expressions
+ * Recursive descent parser for grammar:
+ * <expression> = <ID> | <operator> <expression> <expression>
+ * <operator> = * | + | - | \
+ * <ID> = a | b | c
+ * 
+ * Code written by Adele Howe for CS200
+ */
+public class Parse {
+	private String nextIn;
+	private Scanner scexp;
+	// debug is used to check how the parser is proceeding
+	private boolean debug = true;
+
+	public Parse(String sentence) {
+		// set up iteration over symbols in the sentence
+		scexp = new Scanner(sentence);
+		nextIn = scexp.next();
+		if (debug) { System.out.println("Token: " + nextIn);}
+	}
+
+	private boolean start() {
+		// kicks off parsing and checks that all of string is used
+		if (this.expression(" ")) {	// string appears to parse
+			if (nextIn.equals("")) { // and all of string has been consumed
+				return true;	
+			}
+			else { return false; }  // more string is left
+		}
+		else { return false; }
+	}
+
+	/* Each method returns true or false for whether current part is legal
+	 * <expression> = <ID> | <operator> <expression> <expression>
+	 */
+	private boolean expression(String indent) {
+		// try the two different parts of left hand side of rule
+		if (debug) { System.out.println(indent + "in expression"); }
+		if (ID(indent + " ")) { return true; }
+		else {
+			// rule <expression> = <operator> <expression> <expression>
+			if (operator(indent + " ")) {
+				if (expression(indent + " ")) {
+					if (expression(indent + " ")) {
+						return true;
+					}
+					else {     		
+						if (debug) { System.out.println(indent + " not an expression"); }
+						return false; 
+					}
+				}
+				else  {     		
+					if (debug) { System.out.println(indent + " not an expression"); }
+					return false; 
+				}
+			}
+			else  {     		
+				if (debug) { System.out.println(indent + " not an expression"); }
+				return false; 
+			}
+		}
+	}
+
+	/* rule is
+	 * <ID> = [0-9]+
+	 */
+	private boolean ID(String indent) {
+		if (debug) { System.out.println(indent + "in ID");}
+		if(scexp.hasNextInt())
+			if (nextIn.startsWith("0") || nextIn.startsWith("1") || nextIn.startsWith("2") || nextIn.startsWith("3") || nextIn.startsWith("4") || nextIn.startsWith("5") || nextIn.startsWith("6") || nextIn.startsWith("7") || nextIn.startsWith("8") || nextIn.startsWith("9")) {
+				if (debug) { System.out.println(indent + " found ID"); }
+				if (scexp.hasNext()) {
+					String ID = "" + nextIn.charAt(0);
+					int n = 1;
+					while (n<nextIn.length() && (nextIn.charAt(n)==('0') || nextIn.charAt(n)==('1') || nextIn.charAt(n)==('2') || nextIn.charAt(n)==('3') || nextIn.charAt(n)==('4') || nextIn.charAt(n)==('5') || nextIn.charAt(n)==('6') || nextIn.charAt(n)==('7') || nextIn.charAt(n)==('8') || nextIn.charAt(n)==('9'))) {
+						ID = ID+nextIn;
+						n++;
+					}
+					if (debug){
+						System.out.println("Token: " + ID);
+					}
+					nextIn = scexp.next();
+
+				}
+				//			while (nextIn.equals("0") || nextIn.equals("1") || nextIn.equals("2") || nextIn.equals("3") || nextIn.equals("4") || nextIn.equals("5") || nextIn.equals("6") || nextIn.equals("7") || nextIn.equals("8") || nextIn.equals("9")) {
+				//
+				//			}
+
+				else { 
+					nextIn = ""; 
+				}
+				return true;
+				//System.out.println("Token: " + nextIn);
+			}
+		if (debug) { System.out.println(indent + " not an ID"); }
+		return false;
+	}
+	/* rule is
+	 * <operator> = + | - | * | /
+	 */
+	private boolean operator(String indent) {
+		if (debug) { System.out.println(indent + "in operator: " + nextIn + "  " + nextIn.equals("-"));}
+		if (nextIn.equals("*") || nextIn.equals("-")
+				|| nextIn.equals("+")|| nextIn.equals("/")) {
+			if (debug) { System.out.println(indent + " found operator"); }
+			if (scexp.hasNext()) {
+				nextIn = scexp.next();
+				if (debug) System.out.println("Token: " + nextIn);
+			}
+			else { nextIn = ""; }
+			//System.out.println("Token: " + nextIn);
+			return true;
+		}
+		//System.out.println(indent + " not an operator"); 
+		return false;
+	}
+
+
+	/* 
+	 * Main allows us to test the class
+	 */
+	public static void main(String[] args) {
+		// legal example
+		String string1 = "* 1 2";
+
+		// illegal example
+		//String string1 = "* a b c";
+
+		// what about these...
+		//String string1 = "a * b";
+		//String string1 = "* + a b - c / a b";
+		//String string1 = "a ";
+		Parse newInput = new Parse(string1);
+		System.out.println("String " + string1 + " is legal? " + newInput.start());
+
+	}
+
+}

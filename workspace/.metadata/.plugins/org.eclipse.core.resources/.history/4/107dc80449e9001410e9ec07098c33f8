@@ -1,0 +1,72 @@
+// This is a starter sketch of the Equation class
+// In its current form this code does not compile
+// Tree, BST, TokenIter, Exceptions, are missing
+
+
+public class Equation {
+
+	private boolean debug;
+
+	private String nextToken;	
+	private TokenIter itTokens;
+	
+	Tree exprTree;
+    
+	public Equation(TokenIter iter, boolean debug){
+		itTokens = iter;
+		this.debug = debug;
+                // put the first token from iter in nextToken
+                // initial indent ""
+		nextToken=(iter.next());
+	}
+
+	private void error(String errMess) throws ParseException{
+		throw new ParseException(errMess);
+
+	}
+
+	// line parses a line: LHS "=" expr
+	// lhs = identifier
+	// and returns a Symbol (identifier + value) and stores it in the symbol table
+	public Symbol line(BST symbolTable) throws BSTException, ParseException{
+		String expression = null;
+		TreeNode root;
+		exprTree = null;
+                Symbol lhsVal = null; // Symbol to be returned
+		if(nextToken==null)
+			return null;
+		else {
+			if(debug)
+				System.out.println("line");				
+			// scan left hand side String lhs
+			// if it is not an identifier
+			// call	error("Identifier expected");
+			String lhs = nextToken;
+			
+			// if no next token
+			// call	error("unexpected end of line");
+			if(itTokens.next()==null)
+				throw new ParseException("unexpected end of line");
+			// scan "="
+			// if not "=" call error("= expected");
+			String eq = itTokens.next();
+			if(!eq.equals("="))
+				throw new ParseException("= expected");
+			// parse expression and create expression tree
+			while(itTokens.hasNext()){
+				expression = expression+itTokens.next();
+			}
+			
+                        // evaluate Expression tree
+                        // create lhsVal Symbol (lhs, value)
+                        // insert lhsVal in symbolTable
+			// if(debug)
+			//	System.out.println("retrieving " + lhs + ": " + symbolTable.retrieveItem(lhs));
+			// if(nextToken!=null){
+			//	error("end of line expected");
+			//	return null; 
+			//} else 
+				return lhsVal;
+		}
+	}
+}

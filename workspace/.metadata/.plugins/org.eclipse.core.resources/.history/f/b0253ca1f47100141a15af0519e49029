@@ -1,0 +1,142 @@
+public class StudentLL implements StudentCollectionIF{
+	private String course;
+	private StudentLLNode head;
+	private int size;
+	private boolean debug;  // you can set debug in main
+
+	// the client code provides the course name
+	public StudentLL(String course){
+		// System.out.println("Constructor not implemented");
+		this.course = course;
+		this.size = 0;
+		this.head = null;
+	}
+
+	public String toString(){
+		String res = "Course: " + course + "\n";
+		for(StudentLLNode curr = head; curr !=null; curr=curr.getNext()){
+			StudentIF nS = curr.getStd();
+			res = res + nS + "\n";
+		}
+		return res;
+	}
+
+	@Override
+	public boolean insort(StudentIF s) {
+		// if the student is not in the collection yet
+		//   insert the student ***in order*** and return true
+		// else return false 
+		// order is defined by the compareTo method of StudentIF
+		if(s==null){
+			return false;
+		}
+		else {
+			StudentLLNode slln = new StudentLLNode(s);
+			if(size==0){
+				head = slln;
+			}
+			else if(size==1){
+				if(s.compareTo(head.getStd())>0){
+					head.setNext(slln);
+				}
+				else if(s.compareTo(head.getStd())<0){
+					slln.setNext(head);
+					head = slln;
+
+				}
+				else {
+					return false;
+				}
+			}
+			else{
+				StudentLLNode current = head;
+
+				while(current.getNext()!=null){
+					if(s.compareTo(current.getNext().getStd())<0){
+						break;
+					}
+					current = current.getNext();
+				}
+
+				if(current.getStd().compareTo(s)==0){
+					return false;
+				}
+				else if(current==head){
+					if(s.compareTo(head.getStd())<0){
+						slln.setNext(head);
+						head = slln;
+					}
+					else{
+						slln.setNext(head.getNext());
+						head.setNext(slln);
+					}
+				}
+				else if(current.getNext()==null){
+					current.setNext(slln);
+				}
+				else{
+					slln.setNext(current.getNext());
+					current.setNext(slln);
+				}
+			}
+			//System.out.println(this);
+			size++;
+			return true;
+		}
+	}
+
+	@Override
+	public boolean remove(StudentIF s) {
+		// remove StudentIF s *** using its equals method ***
+		StudentLLNode current = new StudentLLNode(s);
+		while(current.getNext()!=null){
+			if(s.equals(current.getNext().getStd())){
+				//remove
+				head.setStd(null);
+				break;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public int size() {
+		return this.size;
+	}
+
+	@Override
+	public double classAvg() {
+		// TODO Auto-generated method stub
+		//computescore of each
+		//add all scores
+		//divide by size
+		//for loop?
+		StudentLLNode current = head;
+		double grade = 0;
+		int tempsize = 0;
+		while(tempsize<size){
+			grade += current.getStd().computeScore();
+			current=current.getNext();
+			tempsize++;
+		}
+		return grade/size;
+	}
+
+	@Override
+	public double classTopScore() {
+		// TODO Auto-generated method stub
+		//use the first score
+		//iterate through for loop of size
+		//iterate through for loop of each student
+		//any higher score re-sets the "score"
+		StudentLLNode current = head;
+		double grade = 0;
+		while(current.getNext()!=null){
+			if(current.getStd().computeScore()>grade){
+				grade = current.getStd().computeScore();
+			}
+			current=current.getNext();
+		}
+		return grade;
+	}
+}

@@ -1,0 +1,205 @@
+import java.util.Hashtable;
+
+
+public class Equation {
+
+	// you can choose to use debug or not
+	// we will not test debug mode
+	private boolean debug;
+
+	// contains next Token or null at end of line
+	private String nextToken;
+
+	// Token Iterator, set in constructor
+	private TokenIter itTokens;
+
+	//NEW: BST
+//	private static BST bst = new BST();
+
+	// IMPLEMENT
+
+	public Equation(TokenIter iter, boolean debug){
+		itTokens = iter;
+		this.debug = debug;
+		nextTok("");
+	}
+
+	private void nextTok(String indent){
+		if(itTokens.hasNext())
+			nextToken = itTokens.next();
+		else 
+			nextToken = null;
+		if(debug)
+			System.out.println(indent+"next token: " + nextToken);
+	}
+
+	// provided
+	private void error(String errMess) throws ParseException{
+		throw new ParseException(errMess);
+	}
+
+
+	// provided
+	//	public Tree line() throws ParseException{
+	//		TreeNode root;
+	//		Tree tree = new Tree();
+	//		if(nextToken!=null){
+	//			root = expr("");
+	//			tree = new Tree(root);
+	//		}
+	//		if(nextToken!=null)
+	//			error("end of line expected");
+	//		return tree;
+	//	}
+
+
+	// IMPLEMENT
+
+
+	public IdVal line(Hashtable symbolTable) throws ParseException{
+		TreeNode root;
+		if(nextToken==null){
+			//IdVal none = new IdVal("null",false);
+			return null;
+		}
+		boolean test = false;	
+		String key = nextToken;
+//		System.out.println(key);
+		nextTok("");
+//		System.out.println(nextToken);
+
+		if(nextToken.equals("=")){
+			//nextToken =itTokens.next();
+			nextTok("");
+		}
+		else{
+			throw new ParseException("= expected");
+		}
+		if(nextToken!=null){
+			root = expr("");
+			Tree tree = new Tree(root);
+//			tree.preorderTraverse();
+			test = tree.postorderEval(root, symbolTable);
+		}
+		IdVal iv = new IdVal(key, test);
+		symbolTable.insertItem(iv);
+		bst=symbolTable;
+		return iv;
+	}
+
+
+	//NEW: equation = identifier "=" expr REMOVED
+	//		private TreeNode identifier(String indent,String id) throws ParseException{
+	//			if(debug)
+	//				System.out.println(indent+"id");
+	//
+	//			TreeNode left = new TreeNode(id);
+	//			TreeNode right = new TreeNode(id);
+	//			if(nextToken == "="){
+	//				nextTok(indent+" ");
+	//				right = expr(indent+" ");
+	//			}
+	//			boolean val = postorderEval(right);
+	//			IdVal sym = new IdVal(left.getItem(),val);
+	//			return right;
+	//		}
+
+	//Moved from Tree.java
+	public Boolean postorderEval(TreeNode node){
+		// evaluate left tree
+		// evaluate right tree (if not null)
+		// evaluate operator in node and return Boolean result
+		Boolean left = false;
+		Boolean right = false;
+		if(node.getLeft()!=null) 
+			left = postorderEval(node.getLeft());
+		if(node.getRight()!=null) 
+			right = postorderEval(node.getRight());
+		if(node.getItem().equals("or")){
+			return(left||right);
+		}
+		else if(node.getItem().equals("and"))
+			return(left&&right);
+		else if(node.getItem().equals("not"))
+			return(!left);
+		if(node.getItem().equals("true"))
+			return true;
+		return false;
+	}	
+
+	// expr = term ( "or" term )*
+	private TreeNode expr(String indent) throws ParseException{
+		if(debug)
+			System.out.println(indent+"expr");
+
+		TreeNode left = term(indent+" ");
+		while(nextToken != null && nextToken.equals("or") ){
+			String op = nextToken;
+			nextTok(indent+" ");
+			TreeNode right = term(indent+" ");
+			left = new TreeNode(op,left,right);
+		}
+		return left;
+	}
+
+
+	// term = factor ( "and" factor )*
+	private TreeNode term(String indent) throws ParseException{
+		if(debug)
+			System.out.println(indent+"term");
+
+		TreeNode left = factor(indent+" ");
+		while(nextToken != null && nextToken.equals("and") ){
+			String op = nextToken;
+			nextTok(indent+" ");
+			TreeNode right = factor(indent+" ");
+			left = new TreeNode(op,left,right);
+		}
+		return left;
+	}
+	//NEW: Implement identifier
+	// factor = "not" factor | "(" expr ")" | "true"| "false" | identifier
+	private TreeNode factor(String indent) throws ParseException{
+		if(debug)
+			System.out.println(indent+"factor");
+		String fallacy = "false";
+		String truth = "true";
+		if(nextToken.equals("not")){
+			nextTok(indent);
+			TreeNode NOT = new TreeNode("not",factor(indent+" "));
+			return NOT;
+		}
+		else if(nextToken.equals("(")){
+			nextTok(indent);
+			TreeNode paren = expr(indent+" ");
+			if(nextToken.equals(")") )
+				nextTok(indent+" ");
+			else
+				error(") expected");
+			return paren;
+		}
+		else if(nextToken.equals("true")){
+			nextTok(indent);
+			return new TreeNode(truth);
+		}
+		else if(nextToken.equals("false")){
+			nextTok(indent);
+			return new TreeNode(fallacy);
+		}
+		else if(Character.isLetter(nextToken.charAt(0))){
+			boolean value = bst.retrieveItem(nextToken).getVal();
+			nextTok(indent);
+			String val;
+			if (value == true)
+				val = "true";
+			else val = "false";
+			return new TreeNode(val);
+		}
+		else{
+			error("factor expected");
+			return  null;
+		}
+	}
+
+}
+

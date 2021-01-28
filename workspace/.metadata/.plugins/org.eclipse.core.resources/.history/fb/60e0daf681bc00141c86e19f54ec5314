@@ -1,0 +1,61 @@
+
+import java.util.Iterator;
+import java.util.Scanner;
+
+
+public class TokenIter implements Iterator<String>{
+
+	// This class builds a Token Iterator, that produces 
+	// Strings containing numbers (sequences of digits) and 
+	// special characters: "(" ")" "+" "-"  "*" "/"
+
+
+	//input line to be tokenized
+	private String line;
+
+	// the next Token, null if no next Token
+	private String nextToken;
+
+	public TokenIter(String line){
+		this.line = line;
+	}
+	// scLine is the scanner that gets the input line
+		private Scanner scLine = new Scanner(line);
+
+
+	@Override
+	public void remove() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+
+	public static void main(String[] args){
+		String line = "  15*(26+37) - 489/5*61 - (723-8456789)   ";
+		System.out.println("line: [" + line + "]");
+		TokenIter tokIt = new TokenIter(line);
+		// print tokens in square brackets to check absence of white space
+		while(tokIt.hasNext()){
+			System.out.println("next token: [" + tokIt.next() + "]");
+		}
+	}
+
+
+	@Override
+	public boolean hasNext() {
+		// TODO Auto-generated method stub
+		if(scLine.next()!=null){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public String next() {
+		// TODO Auto-generated method stub
+		scLine = new Scanner(line);
+		nextToken=scLine.next();
+		return nextToken;
+	}
+
+}

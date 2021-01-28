@@ -1,0 +1,171 @@
+import java.util.ArrayList;
+
+public class Assign4 {
+
+	public static final int[] coins = {1, 5, 10, 25};
+
+	/**
+	 * 
+	 * @param n>0 size of the parking lot
+	 * @return the number of ways we can park:
+	 *   Tanks: size 3
+	 *   Explorers: size 2
+	 *   Civics:  size 1
+	 *   in a parking lot of size n
+	 *    
+	 */
+	public long pentagonPark (int n)
+	{
+		//System.out.println("pentagonPark not implemented yet");
+		// because of tanks, we need three base cases
+		if(n==1){
+			return 1;
+		}
+		else if(n==2){
+			return 2;
+		}
+		else if(n==3){
+			return 4;
+		}
+		else return pentagonPark(n-3)+pentagonPark(n-2)+pentagonPark(n-1);
+	}
+
+	/**
+	 * 
+	 * @param n>0: size of parking lot
+	 * @param A: array of solved parking lot problems
+	 * @return the number of ways we can park:
+	 *   Tanks: size 3
+	 *   Explorers: size 2
+	 *   Civics:  size 1
+	 *   in a parking lot of size n
+	 */
+	public long pentagonPark (int n, long [] A) {
+		//System.out.println("fast pentagonPark not implemented yet");
+		if(n==1){
+			return A[n]=1;
+		}
+		else if(n==2){
+			return A[n]=2;
+		}
+		else if(n==3){
+			return A[n]=4;
+		}
+		if (A[n]==0){
+			A[n] = pentagonPark(n-1,A)+pentagonPark(n-2,A)+pentagonPark(n-3,A);
+		}
+		return A[n];
+	}
+
+
+
+	public long groups (int n, int k){
+		//pre: 0 < k <= n
+		//System.out.println("groups not implemented yet");		
+		if(k==n){
+			return 1;
+		}
+		if(k==1){
+			return 1;
+		}
+		else return groups(n-1,k)+groups(n-1,k-1)+groups(n-1,k);
+	}
+
+
+	public int mkChange(int n){
+		//System.out.println("mkChange not implemented yet");
+		/*if(n==25){
+			return 13;
+		}
+		if(n>=1&&n<5){
+			return 1;
+		}
+		else if(n>=5&&n<10){
+			return 2;
+		}
+		else if(n>=10&&n<25){
+			return mkChange(n-10)+mkChange(n-5)*mkChange(n-15)+mkChange(n-15)+mkChange(n-20);
+		}
+		else if(n>=25){
+			return mkChange(n-5)+mkChange(n-10)+mkChange(n-25);
+		}
+		else return 0;
+		 */
+		int ways = 1;
+		for(int i=3;i>=0;i--){
+			if (coins[i]<=n){
+				ways++;
+			}
+		}
+		return ways;
+	}
+
+
+
+
+	/*
+	 * Recursively generate all bit patterns of length n
+	 * @param subsets - an ArrayList that accumulates the bit patterns
+	 * @param n - length of the bit patterns to be generated
+	 * precondition:  n >= 1, subsets contains bit patterns of length n-1
+	 * postcondition:  subsets contains all bit patterns of length n
+	 */
+	void recursiveBitPatterns(ArrayList<String> subsets, int n){
+		//System.out.println("recursiveBitPatterns not implemented yet");
+		if (n==1){
+			subsets.add("0");
+			subsets.add("1");
+			return;
+		}
+		else{
+			recursiveBitPatterns(subsets,n-1);
+			ArrayList<String> temp = new ArrayList<>();
+			for(int i=0;i<subsets.size();i++){
+				String S = subsets.get(i);
+				S = S+"0";
+				temp.add(S);
+				String SS = subsets.get(i);
+				SS = SS+"1";
+				temp.add(SS);
+			}
+			subsets.clear();
+			subsets.addAll(temp);
+			return;
+		}
+	}
+
+	/**
+	 * @param args: input file name
+	 * @throws FileNotFoundException 
+	 */
+	public static void main(String[] args) {
+
+		Assign4 A4 = new Assign4();
+		//long starttime = System.currentTimeMillis();
+		for(int i=1;i<=5;i++){
+			System.out.println("slow Pentagon Park(" +i+ "): " + A4.pentagonPark(i));
+			long[] lot = new long[i+1];
+			System.out.println("fast Pentagon Park(" +i+ "): " + A4.pentagonPark(i,lot));
+		}  
+		//long endtime = System.currentTimeMillis();
+		//long time = endtime-starttime;
+		//System.out.println(time);
+
+		for(int amount=0; amount <=28 ; amount +=4){
+			System.out.println("#ways to pay : " + amount+ " =  " + A4.mkChange(amount));
+		}
+
+		System.out.println("groups(1,1) = "  + A4.groups(1,1));
+		System.out.println("groups(2,1) = "  + A4.groups(2,1));
+		System.out.println("groups(3,2) = "  + A4.groups(3,2));		
+		System.out.println("groups(4,2) = "  + A4.groups(4,2));
+
+		ArrayList<String> patterns = new ArrayList<String>();
+		A4.recursiveBitPatterns(patterns, 3);
+		System.out.println("number of bit patterns of 3 bits: " + patterns.size());
+		for(int i = 0; i < patterns.size(); i++)
+			System.out.println(patterns.get(i));
+	}
+
+}
+

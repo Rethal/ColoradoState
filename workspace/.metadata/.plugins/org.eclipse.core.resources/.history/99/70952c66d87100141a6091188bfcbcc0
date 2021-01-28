@@ -1,0 +1,81 @@
+import java.text.DecimalFormat;
+
+public class Student implements StudentIF{
+
+	private String name;
+	private int id;
+	private int[] grades;
+	private int numGrades;
+	private int totalGrades;
+
+	// The constructor
+	//    initializes the instance variables  
+	//    name, id, grades = new int[totalGrades], and numGrades = 0;
+	public Student (String name, int id, int totalGrades){
+      // System.out.println("Constructor not implemented");
+		this.name = name;
+		this.id = id;
+		this.numGrades = 0;
+		this.grades = new int[totalGrades];
+		this.totalGrades = totalGrades;
+		
+	}
+
+	public String toString() {
+		String res = name + "\t" + id + " ";
+		for (int i=0; i < totalGrades; i++) {
+			res += " " + grades[i];
+		}
+		res += "\tscore: " + new DecimalFormat("0.00").format(computeScore());
+		return res;
+	}
+	
+	public double computeScore(){
+		int total = 0;
+		for (int i=0; i<totalGrades; i++){
+			total = total+grades[i];
+		}
+		total = total/totalGrades;
+		return total;
+	}
+	
+	public boolean addGrade (int newGrade){
+		if(numGrades<totalGrades){
+			grades[numGrades] = newGrade;
+			numGrades++;
+			return true;
+		}
+		else{
+			numGrades++;
+			return false;
+		}
+	}
+	public boolean equals(StudentIF o){
+		int ID = o.getId();
+		if(this.id==ID){
+			return true;
+		}
+		else return false;
+	}
+
+	@Override
+	public int compareTo(StudentIF o) {
+		int ID = o.getId();
+		int pos = ID-this.id;
+		return pos;
+	}
+
+	@Override
+	public String getName() {
+		String Name = this.name;
+		return Name;
+	}
+
+	@Override
+	public int getId() {
+		int ID = this.id;
+		return ID;
+	}
+
+}
+

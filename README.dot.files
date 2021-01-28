@@ -1,0 +1,14 @@
+The directory ~info/dot.files/ contains the default start up files
+given to new users.
+
+Current files are:
+  .bash_profile:  read by bash at beginning of login session
+  .bashrc:        read by bash at beginning of interactive sessions
+                  that are not login sessions
+  .cshrc:         read by csh & tcsh at beginning of all sessions
+  .kshrc:         read by ksh at beginning of interactive sessions
+  .login:         read by csh & tcsh at beginning of login session
+  .pinerc:        pine configuration
+  .simrc:         GENESIS configuration
+  .mailcap:       associates programs with MIME types for some mail readers
+  .vimrc:         vim configuration

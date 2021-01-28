@@ -1,0 +1,32 @@
+Intro 1: /usr/share/pixmaps/xbzf136INTRO-1.jpg
+Forbidden Planet
+
+Intro 2: /dev/136intro-2jjaj.JPEG
+Godzilla
+
+Intro 3: /var/log/136intro-3.jpg
+It Came From Outer Space 
+
+Intro 4: /etc/wuer136intro-4.JPG
+2001 a space odyssey
+
+Intro 5: /.hidden/asdf136Intro-5kqlw.jpeg
+The Fly
+
+
+1: 1 sentence: What goes in the /var directory on a UNIX computer?
+/var contains variable data, cached data, log files, and various other files of data
+that the system writes to while it is running.
+
+2: 1 sentence: What is the /dev directory for on a UNIX computer?
+The /dev directory contains "device files" which I interpret as drivers for various
+devices (from floppies to USBs) that connect to the computer.
+
+3: On your experimental node, find out how large the disks are and how much space is free. Put
+this information in a separate file called top_secret/diskfree.txt. (See the 
+infobox on command redirection for an easy way to do this.)
+
+
+4: On your experimental node, find out the "vendor id" of the experimental node's CPU model.
+-Hint: there is a dynamic file on the system that includes this information.
+via lscpu: GenuineIntel

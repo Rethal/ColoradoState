@@ -1,0 +1,20 @@
+public class StudentLL{
+	private String course;
+	private StudentLLNode head;
+	private int size;
+	private boolean debug;  // you can set debug in main
+
+	// the client code provides the course name
+	public StudentLL(String course){
+        System.out.println("Constructor not implemented");
+	}
+
+	public String toString(){
+		String res = "Course: " + course + "\n";
+		for(StudentLLNode curr = head; curr !=null; curr=curr.getNext()){
+			 StudentIF nS = curr.getStd();
+			 res = res + nS + "\n";
+		}
+		return res;
+	}
+}

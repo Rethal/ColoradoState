@@ -1,0 +1,53 @@
+
+
+
+                      New Account Information
+
+
+Welcome to the CSU Computer Science Department's computing facilities.
+In order to use the facilities you need a login, (a unique id string)
+and a password.  These are initially allocated by the department.
+Login strings are typically your CSU EID name.
+
+Your initial password is your CSUID number, a nine-digit number
+beginning with "8".  Note: your CS password is independent of your
+CSU EID password.  Our machines are composed of two sets, having
+distinct password domains: a Windows domain and a Unix domain.
+As soon as possible your should log on to a machine in each of
+these two domains and change your password.  In the unix domain, use
+the passwd command on any department linux machine to change your
+password.  In the Windows domain, simultaneously press the <Ctrl>,
+<Alt>, and <Delete> keys. (Note that the Windows domain accounts
+take about an hour longer than the unix accounts to appear, so
+please be patient.)
+
+Machines are available for general CS-related use in the CS department
+labs, on the first floor of the Computer Science Building.  If you're
+connecting from a remote site some good machines to connect to get
+started are:
+
+  yam.cs.colostate.edu 129.82.47.248 (Fedora Linux, 64-bit)
+  zucchini.cs.colostate.edu 129.82.47.249 (Fedora Linux, 64-bit)
+
+A list of more machines can be found at 
+
+  http://www.cs.colostate.edu/~info/machines
+
+You'll need to use ssh and sftp, since telnet and ftp are disabled.
+
+By default, your mail goes to a server named mail.cs.colostate.edu.
+You can read your mail using any mail-reader that supports the IMAP
+or POP protocols, but IMAP is recommended.  You can forward you email
+using a unix .forward file in your home directory.
+
+Further information about accounts, email, and using the department's
+computing facilities is available at the following locations:
+
+  http://www.cs.colostate.edu/cstop/csfacilities/systems.html
+  http://www.cs.colostate.edu/~info/faq.html
+
+The latter is a list of frequently asked questions.  Please look
+through it as it contains an important statement of policy regarding
+backups, in addition to other useful information.  Please note that
+desktop machines are not backed up.  All important data should be
+stored on department servers (in your Unix home directory).

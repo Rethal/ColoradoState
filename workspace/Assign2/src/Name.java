@@ -1,0 +1,73 @@
+
+public class Name {
+
+	private String first;
+	private String last;
+	
+	public Name(String first, String last){
+		this.first = first;
+		this.last  = last;
+	}
+	
+	public String getFirst(){
+		return first;
+	}
+		
+	public String getLast(){
+		return last;
+	}
+	
+    /**
+     * 
+     * @param p other point
+     * @return test for equality using epsilon, because we 
+     *         are dealing with doubles,so roundoff can occur
+     */
+    
+	public boolean equals (Name n){
+//          System.out.println("equals not implemented yet");
+//          return false;
+            return (first.equals(n.getFirst()) && last.equals(n.getLast()));
+    }
+	
+	
+    public String toString(){
+    	return first + " " + last;
+    }
+	
+    /**
+     * We need this equals method for ArrayList<Name>, because
+     * the generic ArrayList is really an ArrayList of Objects
+     * with casts (type conversions) put in by java.
+     * 
+     * In the case of equals, the signature for ArrayList, the signature
+     * of equals is 
+     *   public boolean equals(Object o)
+     * and the method below overrides the Object equals method
+     * and then calls this class's equals(Name) method
+     *    
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    
+     
+     public boolean equals(Object obj){
+            if (obj instanceof Name){
+                    Name p = (Name)obj;
+                return equals(p);
+            }
+        return false;
+     }
+     
+    
+    
+   
+    
+    
+    public static void main(String[] args) {
+        // TODO test harness for Name
+        Name n1 = new Name("Wim", "Bohm");
+        Name n2 = new Name("Brent", "Grundman");
+        System.out.println("n1: " + n1 + " equals n2: " + n2 + ": " + n1.equals(n2) );
+    }
+
+}

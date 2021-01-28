@@ -1,0 +1,174 @@
+Practice:
+
+
+a)  How many permutations of {a,b,c,d,e,f,g} end with a?
+6!
+
+
+b) How many different ways are there to choose a president, vice president and treasurer out of 10 people?
+10c3*3!
+
+
+c) How many ways are there to choose a committee of 3 people out of ten people?
+10c3
+
+
+Exercises:
+
+
+1: How many positive integers between 5 and 31:
+
+1.1) are divisible by 3?
+9
+
+
+1.2) are divisible by 4?
+6
+
+
+1.3) are divisible by 3 and 4?
+2
+
+
+1.4) are divisible by 3 or 4?
+13
+
+2: How many bit strings of length 14 contain:
+
+2.1) exactly four 1s?
+14c4
+
+
+
+2.2) at most four 1s?
+14c4+14c3+14c2+14c1+14c0
+
+
+
+2.3) at least four 1s?
+2^14-14c3-14c2-14c1-14c0
+
+
+
+2.4) an equal number of 0s and 1s?
+14c7
+
+
+
+3) If there is a room with 36 people and every person shakes hands with every other person exactly once, how many handshakes are there in all?
+36*17+18
+or 36c2
+
+
+4) How many ways can a set of three positive integers less than 100 be chosen?
+99c3
+
+
+
+
+5) A professor writes 40 discrete mathematics true/false questions. Of the statements in these questions, 17 are true. If the questions can be positioned in any order, how many different answer keys are possible?
+40c17
+
+
+
+
+6) If a password is made up of lowercase letters or digits, how many passwords of length 6 are there that contain AT LEAST one digit?
+36^6-26^6
+
+
+7)  How many permutations of the letters ABCDEFG contain
+    - the string BCD? 5!
+    - the strings BA and GF? 5!
+
+
+
+Recursion 
+
+
+fix'em:
+
+
+//return the factorial of n
+public int factorial(int n){
+	if(n == 0)
+		return 1;
+	return factorial(n-1)*n;
+}
+
+
+
+//return the factorial of n
+public int factorial(int n){
+	if(n == 0)
+		return 1;
+	return n * factorial(n-1);
+}
+
+
+
+//return the number at the nth index in the Fibonacci sequence
+public int fib(int n){
+	if(n == 0 || n == 1)
+		return 1;
+	return fib(n-1) + fib(n-2);
+}
+
+
+
+In class we solved the problem of finding the maximum element in an array using the following approach:
+The maximum in the array is the maximum of the first element, and the maximum in the rest of the array.
+An alternative approach is to divide the array into two equal parts and compute the maximum as the 
+maximum over the two parts.  Implement this approach!
+Do you expect one of these to work faster or slower than doing this with a for loop?
+
+
+
+
+
+Induction
+
+Let's get induction down.  Prove using mathematical induction that For n >= 1, 1×2 + 2×3 + 3×4 + ... + (n)(n+1) = (n)(n+1)(n+2)/3
+
+(a) What is the statement P(1)?
+p(1) = (n)(n+1)(n+2)/3 = 1*2*3/3 = 2
+
+
+
+(b) Show that P(1) is true (basis step).
+p(1)= (1)(1+1) = 1(1+1)(1+2)/3 = 1*2 = 1*2*3/3 = 1*2 => True
+
+
+
+
+
+(c) What is the induction hypothesis?
+p(k) = 1*2+2*3+...+(k)(k+1) = (k)(k+1)(k+2)/3 is true
+
+
+
+
+(d) What do you need to to prove in the inductive step?
+p(k+1) = 1*2+2*3+...+(k)(k+1)+(k+1)(k+2) = (k+1)(k+2)(k+3)/3
+
+
+
+
+
+
+(e) Complete the inductive step.
+p(k+1) = ...+(k)(k+1)+(k+1)(k+2) =
+	(k)(k+1)(k+2)/3 + (k+1)(k+2) =
+	(k+1)(k+2)(k/3+1) =
+	(k+1)(k+2)(k+3) =
+	assuming p(n) = true
+	p(n) -> p(n+1)
+
+
+
+
+
+
+(f) Explain why these steps show that this formula is true for every positive integer n.
+from (e) proved p(n) -> p(n+1) and from (b) proved p(1)->p(2)->p(3)...
+
+

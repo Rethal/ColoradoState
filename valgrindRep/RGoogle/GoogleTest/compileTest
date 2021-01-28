@@ -1,0 +1,3 @@
+#!/bin/bash
+g++ -Igtest-1.5.0/include -pthread unittest.cpp libgtest.a -o unittest
+./unittest

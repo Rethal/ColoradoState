@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;TokenIter.java&apos; to &apos;ParseDriver.java&apos;&#x0A;- Original project: &apos;200P2&apos;&#x0A;- Destination element: &apos;ParseDriver.java&apos;&#x0A;- Original element: &apos;TokenIter.java&apos;" description="Copy compilation unit" destination="=200Rec6/&lt;{ParseDriver.java" element1="/src&lt;{TokenIter.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1424984798315" units="1" version="1.0"/>
+</session>

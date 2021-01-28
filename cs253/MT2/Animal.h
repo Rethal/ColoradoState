@@ -1,0 +1,65 @@
+#ifndef ANIMAL_H_INCLUDE
+#define ANIMAL_H_INCLUDE
+
+#include <iostream>
+using std::cout;
+using std::endl;
+#include<string>
+using std::string;
+#include<vector>
+using std::vector;
+
+class Animal {
+public:
+  inline string Behave(bool is_cold) {return WarmUp();}
+  inline string Name() const {return "Arianna";}
+  virtual string WarmUp() = 0;
+};
+
+class Mammal : public Animal {
+public:
+  Mammal(double temperature = 90.0) : temp(temperature) {}
+  virtual ~Mammal() {}
+  virtual string WarmUp() { return "shiver"; }
+  inline virtual string Name() const {return "Mike";}
+  inline double Temperature() {return temp;}
+protected:
+  double temp;
+};
+
+class IDstruct {
+public: 
+  IDstruct() {id = id_ctr++;}
+  inline int& ID() {return id;}
+  static inline int IdCtr() {return id_ctr;}
+  int id;
+protected:
+  static int id_ctr;
+};
+
+
+
+
+
+
+class ZooProperty {
+public:
+  ZooProperty() {idptr = new IDstruct(); value = 0.99;}
+  ZooProperty(const ZooProperty& src) {idptr = new IDstruct(); value = 0.91;}
+  ~ZooProperty() {delete idptr;}
+  inline int ID() {return idptr->ID();}
+  inline virtual double Value() const {return value;}
+  IDstruct* idptr;
+  double value;
+};
+
+class Quagga : public Mammal, public ZooProperty {
+public:
+  Quagga(double t = 96.0) { temp = t; value = 999999.9; }
+  inline string Name() const {return "Qiana";}
+  double value;
+};
+
+
+
+#endif // ANIMAL_H_INCLUDE

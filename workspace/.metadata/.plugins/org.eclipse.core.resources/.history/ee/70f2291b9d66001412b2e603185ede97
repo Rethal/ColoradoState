@@ -1,0 +1,13 @@
+
+public class Manager extends Engineer {
+	
+	public Manager(String empName, int empId, int managerID) {
+		super(empName, empId, managerID);
+	}
+	public handleCrisis{
+		
+	}
+	public boolean work(){
+		return true;
+	}
+}

@@ -1,0 +1,11 @@
+
+public class XcelStudent extends Student {
+	String projectGrade = "";
+
+public XcelStudent(String name, int id, int totalGrades, String projectGrade){
+		super(name, id, totalGrades);
+		this.projectGrade = projectGrade;
+	}
+
+
+}

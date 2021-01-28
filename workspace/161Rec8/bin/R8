@@ -1,0 +1,89 @@
+ 
+Principles of counting:  the product and addition rules.
+
+
+
+We'll begin with a few warm-up exercises guided by your TA.
+
+
+  a) How many 6 character passwords are there that only use lowercase letters?
+	26^6
+
+
+  b) How many 6 character passwords are there that start with 2 digits and end with 4 lowercase letters?
+	10^2*26^4
+
+
+  c) How many 5 or 6 character passwords are there that use only lowercase letters?
+	26^5+26^6
+
+
+  d) How many people do you need in a room before there are two people that were born in the same month?
+	13
+
+
+Solve these on your own:
+
+
+
+  1: How many ways are there for a person to have 3 initials?
+	26^3
+
+
+
+  2: How many bit strings are there of length six or less?
+	2^6+2^5+2^4+2^3+2^2+2
+
+
+
+  3: How many bit strings of length seven begin with two 0s AND end with three 1s?
+	2^2
+
+
+
+  4: How many bit strings of length seven either begin with two 0s OR end with three 1s?
+	2^5+2^4-2^2
+
+
+
+  5. How many people do you need in a room before you can guarantee that two people have names that start with the same letter?
+	27
+
+
+
+  6. How many people do you need in a room before you can guarantee that two people have the same birthday?
+	367
+
+
+
+  7. Six cooks are preparing dishes in the kitchen in an Italian restaurant.  There are seven waiters that pick up the food and bring it to the tables in the dining area.  How many different routes are possible (by way of different people) for the food to get to the patrons?
+	6*7
+
+
+
+  8.  How many 6-character lowercase passwords are there, that begin with 'r' or end with 't'?
+	26^5+26^5-26^4
+
+
+
+  9.  How many cards must you draw before you are guaranteed to have two of the same suit?
+	5
+
+
+
+  Challenge questions:
+ 
+  10. How many people do you need in a room before you can guarantee that there are four from the same state? (there are 52 states)
+	Assuming 52 states (there are 50), 157 (but it would really require 151), unless you're counting people not from here in which case you'd also have to add
+	the entire popularity of the world that is not from America, plus 157 (151).
+
+  11. How many cards must you draw before you are guaranteed to have a spade?
+	40, if Jokers are removed
+
+  12. How many cards must you draw before you are guaranteed to have two kings?
+	50, if Jokers are removed
+
+  13. An indoor soccer team is composed of 6 players and must have at least 3 girls.  
+      If you have 5 girls and 7 boys to choose from, how many different ways are there to form a team?
+	5c3*7c3+5c4*7c2+5c5*7c1
+

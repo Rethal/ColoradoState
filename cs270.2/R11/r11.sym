@@ -1,0 +1,11 @@
+// Symbol table
+// Scope level 0:
+//	Symbol Name       Page Address
+//	----------------  ------------
+//	COMPUTE           300F
+//	RESULT            3022
+//	MAIN              3000
+//	STACK             301E
+//	PARAM0            301F
+//	PARAM1            3020
+//	PARAM2            3021

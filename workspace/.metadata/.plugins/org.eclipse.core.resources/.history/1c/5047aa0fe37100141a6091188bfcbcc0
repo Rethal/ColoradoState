@@ -1,0 +1,50 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+public class StudentRecords {
+
+	public static String readString(Scanner scan) throws NoSuchElementException {
+		return scan.next();	
+	}
+
+	public static int readInt(Scanner scan) throws NoSuchElementException {
+		return scan.nextInt();	
+	}
+
+	/**
+	 * @param args: coursefile #grades
+	 * @throws FileNotFoundException 
+	 */
+	public static void main(String[] args) throws FileNotFoundException {
+		String course=args[0];	
+		int numGrades=Integer.parseInt(args[1]);
+
+
+		System.out.println("Course " + course + ": " + 
+				numGrades   + " grades");
+
+
+		Scanner scan = new Scanner( new File (course));	
+		String name;
+		int id;
+		// the file name is the course name
+		StudentCollectionIF sDB = new StudentLL(course);
+		int grade;
+		while(scan.hasNext()) { 
+			name = readString(scan);
+			id =   readInt(scan);
+			StudentIF s= new Student(name,id,numGrades);
+			System.out.println(s);
+			for(int j=0;j<numGrades;j++){
+				grade = scan.nextInt();
+				s.addGrade(grade);
+			}
+			//sDB.insort(s);
+		}
+		System.out.println("Top Score: " + sDB.classTopScore());
+		System.out.println("Avg Score: " + sDB.classAvg());
+		System.out.println(sDB);
+	}
+}

@@ -1,0 +1,153 @@
+
+
+public class BST {
+	private BSTNode root;
+	private boolean debug;
+
+	//empty tree
+	public BST(boolean debug){
+		this.root = null;
+		this.debug = debug;
+	}
+
+	public boolean isEmpty(){
+		return root==null;
+	}
+
+	public void insertItem(String item) throws BSTException{
+		root = insertItem(root, item);
+	}
+
+	private BSTNode insertItem(BSTNode node, String item) throws BSTException{
+		BSTNode newSubTree;
+		if(node==null){
+			node = new BSTNode(item);
+			return node;
+		}
+		String tok = node.getItem();
+		if(item.compareTo(tok)<0){
+			newSubTree = insertItem(node.getLeft(), item);
+			node.setLeft(newSubTree);
+			return node;
+		}
+		if(item.compareTo(tok)>0){
+			newSubTree = insertItem(node.getRight(), item);
+			node.setRight(newSubTree);
+			return node;
+		}
+		// ERROR: inserting existing item
+		else 
+			throw new BSTException("Inserting existing item!");
+	}
+
+	public String retrieveItem(String key){
+		return retrieveItem(root,key);
+	}
+	
+	private String retrieveItem(BSTNode node, String key){
+		String treeItem;
+		
+		if(node==null)
+			treeItem = null;
+		else{
+			String nodeItem = node.getItem();
+			if(key.compareTo(nodeItem) == 0)
+				//found
+				treeItem = nodeItem;
+			else if(key.compareTo(nodeItem) < 0)
+				//search left
+				treeItem = retrieveItem(node.getLeft(), key);
+			else
+				// search right
+				treeItem = retrieveItem(node.getRight(), key);
+		}
+		return treeItem;
+
+	}
+	
+
+	public void preorderTraverse(){
+		if(debug)
+			System.out.println("Pre Order Traversal");
+		if (!isEmpty())
+			preorderTraverse(root,"");
+		else
+			System.out.println("root is null");
+	}
+
+	public void preorderTraverse(BSTNode node, String indent){
+		if(debug) System.out.println(indent+node.getItem());
+		
+		if(node.getLeft()!=null) {
+			System.out.println(indent+"left");
+			preorderTraverse(node.getLeft(),indent+" ");
+		}
+
+		if(node.getRight()!=null) {
+			System.out.println(indent+"right");
+			preorderTraverse(node.getRight(),indent+" ");
+		}
+
+	}
+	public void deleteItem(String key){
+		deleteItem(root, key);
+	}
+
+	public String deleteItem(BSTNode node, String key){
+		String treeItem;
+		if(node==null){
+			treeItem=null;
+		}
+		else{
+			String nodeItem = node.getItem();
+			if(key.compareTo(nodeItem) == 0){
+				//found
+				node.setLeft(node.delete(node.delete(node)));
+				treeItem = nodeItem;
+			}
+			else if(key.compareTo(nodeItem) < 0)
+				//search left
+				treeItem = deleteItem(node.getLeft(), key);
+			else
+				// search right
+				treeItem = deleteItem(node.getRight(), key);
+			//4.setItem(delete("4"))
+			//8.setLeft(delete("6")); returns "7"
+		}
+		return treeItem;
+	}
+	public static void main(String[] args) throws BSTException{
+
+		BST bst = new BST(true);
+		
+		bst.insertItem("O");
+		
+		bst.insertItem("H"); 
+		
+		bst.insertItem("V"); 
+		
+		//bst.insertItem("D"); 
+		
+		bst.insertItem("K"); 
+		
+		//bst.insertItem("X"); 
+		
+		bst.insertItem("R");
+		
+		bst.preorderTraverse();
+		
+		String tR = bst.retrieveItem("R");
+		System.out.println("String retrieved: " + tR);
+
+		String tA = bst.retrieveItem("A");
+		System.out.println("String retrieved: " + tA);
+		
+		bst.deleteItem("H");
+		String tH = bst.retrieveItem("H");
+		bst.preorderTraverse();
+		bst.insertItem("R");
+		
+	}
+
+
+}

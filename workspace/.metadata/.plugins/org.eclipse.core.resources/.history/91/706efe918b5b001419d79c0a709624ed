@@ -1,0 +1,102 @@
+import java.util.ArrayList;
+
+public class Assign4 {
+	
+	public static final int[] coins = {1, 5, 10, 25};
+	
+    /**
+     * 
+     * @param n>0 size of the parking lot
+     * @return the number of ways we can park:
+     *   Tanks: size 3
+     *   Explorers: size 2
+     *   Civics:  size 1
+     *   in a parking lot of size n
+     *    
+     */
+	public long pentagonPark (int n)
+	{
+		//System.out.println("pentagonPark not implemented yet");
+		// because of tanks, we need three base cases
+		return 0;
+	}
+	
+	private int pentHelp (int n, int C, int E, int T){
+		return 0;
+	}
+
+	/**
+	 * 
+	 * @param n>0: size of parking lot
+	 * @param A: array of solved parking lot problems
+	 * @return the number of ways we can park:
+         *   Tanks: size 3
+         *   Explorers: size 2
+         *   Civics:  size 1
+         *   in a parking lot of size n
+	 */
+	public long pentagonPark (int n, long [] A) {
+		//System.out.println("fast pentagonPark not implemented yet");
+        return 0;
+	}
+    
+	
+	
+	public long groups (int n, int k){
+		//pre: 0 < k <= n
+		//System.out.println("groups not implemented yet");		
+        return 0;
+	}
+
+		
+	public int mkChange(int n){
+		//System.out.println("mkChange not implemented yet");
+		return 0;
+	}
+	
+	
+	
+
+	/*
+	 * Recursively generate all bit patterns of length n
+	 * @param subsets - an ArrayList that accumulates the bit patterns
+	 * @param n - length of the bit patterns to be generated
+	 * precondition:  n >= 1, subsets contains bit patterns of length n-1
+	 * postcondition:  subsets contains all bit patterns of length n
+	 */
+	void recursiveBitPatterns(ArrayList<String> subsets, int n){
+		System.out.println("recursiveBitPatterns not implemented yet");
+	}
+
+	/**
+	 * @param args: input file name
+	 * @throws FileNotFoundException 
+	 */
+	public static void main(String[] args) {
+			
+		Assign4 A4 = new Assign4();
+		
+		for(int i=1;i<=5;i++){
+			System.out.println("slow Pentagon Park(" +i+ "): " + A4.pentagonPark(i));
+			long[] lot = new long[i+1];
+			System.out.println("fast Pentagon Park(" +i+ "): " + A4.pentagonPark(i,lot));
+		}  
+				
+		for(int amount=0; amount <=20 ; amount +=4){
+			System.out.println("#ways to pay : " + amount+ " =  " + A4.mkChange(amount));
+		}
+		
+		System.out.println("groups(1,1) = "  + A4.groups(1,1));
+		System.out.println("groups(2,1) = "  + A4.groups(2,1));
+		System.out.println("groups(3,2) = "  + A4.groups(3,2));		
+		System.out.println("groups(4,2) = "  + A4.groups(4,2));
+		
+		ArrayList<String> patterns = new ArrayList<String>();
+		A4.recursiveBitPatterns(patterns, 3);
+		System.out.println("number of bit patterns of 3 bits: " + patterns.size());
+		for(int i = 0; i < patterns.size(); i++)
+			System.out.println(patterns.get(i));
+	}
+
+}
+

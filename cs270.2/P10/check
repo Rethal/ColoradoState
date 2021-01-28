@@ -1,0 +1,15 @@
+#!/bin/bash
+#Ilya Matyukhin
+
+i=1
+for file in *.asm
+do
+  echo "Test $i: $file"
+  ./mylc3as -hex $file 1>/dev/null 2>&1 
+  cp "${file%.*}.hex" "${file%.*}1.hex"
+  ~cs270/lc3tools/lc3as -hex file.asm  1>/dev/null 2>&1 
+  cp "${file%.*}.hex" "${file%.*}2.hex"
+  diff "${file%.*}1.hex" "${file%.*}2.hex"
+  echo "--------------"
+  ((i++))
+done

@@ -1,0 +1,60 @@
+// PA1 Assignment
+// Author: Brenton Grundman
+// Date:   8/22/2014
+// Class:  CS270
+// Email:  grundman@rams.colostate.edu
+
+// Include files
+#include <stdio.h>
+#include <stdlib.h>
+
+double square(double value)
+{
+    return value * value;
+}
+
+double computeCircle(double radius){
+return 3.141593 * radius * radius;
+}
+
+double computeTriangle(double side){
+return .433013 * side * side;
+}
+
+double computeSquare(double side){
+return side*side;
+}
+
+double computePentagon(double side){
+return 1.720477*side*side;
+}
+
+double computeHexagon(double side){
+return 2.598076*side*side;
+}
+
+int main(int argc, char *argv[])
+{
+    // Check number of arguments
+    if (argc < 2)
+        printf("usage PA1 <double>\n");
+
+    double d = atof(argv[1]);
+    double e = atof(argv[2]);
+double f = atof(argv[3]);
+double g = atof(argv[4]);
+double h = atof(argv[5]);
+
+    //printf("The square of %.5f equals %.5f.\n", d, square(d));
+
+printf("CIRCLE, radius = %.5f, area = %.5f.\n", d, computeCircle(d));
+
+printf("TRIANGLE, radius = %.5f, area = %.5f.\n", e, computeTriangle(e));
+
+printf("SQUARE, length = %.5f, area = %.5f.\n", f, computeSquare(f));
+
+printf("PENTAGON, length = %.5f, area = %.5f.\n", g, computePentagon(g));
+
+printf("HEXAGON, length = %.5f, area = %.5f.\n", h, computeHexagon(h));
+    return 0;
+}

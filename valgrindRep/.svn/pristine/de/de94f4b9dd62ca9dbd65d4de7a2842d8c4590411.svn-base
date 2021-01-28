@@ -1,0 +1,19 @@
+Valid 8 Test Cases:
+./PA7 target1.txt 1.txt 2.txt 3.txt avg
+./PA7 target1.txt 1.txt 2.txt 3.txt med 
+./PA7 target1.txt 2.txt 3.txt Linf 
+./PA7 target1.txt 1.txt 2.txt 3.txt L2 
+./PA7 target2.txt 2.txt 3.txt avg 
+./PA7 target2.txt 2.txt 3.txt med 
+./PA7 target2.txt 2.txt 3.txt Linf 
+./PA7 target2.txt 1.txt 3.txt L2
+
+Expected Output:
+1.txt
+1.txt
+2.txt
+1.txt
+2.txt
+2.txt
+2.txt
+1.txt 

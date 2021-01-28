@@ -1,0 +1,25 @@
+import java.util.Random;
+
+
+public class Engineer extends Employee{
+
+	public Engineer(String empName, int empId, int managerId){
+		super(empName, empId, managerId);
+		
+	}
+	public String toString() {
+		return "Engineer "+super.toString();
+	}
+	public boolean work(){
+		Random crisisGen = new Random();
+		if (crisisGen.nextInt(10) == 0) {
+			//it's a crisis!
+			System.out.println("Crisis!");
+			return false;
+		} else {
+			//everything is OK!
+			System.out.println("I'm programming");
+			return true;
+		}
+	}
+}

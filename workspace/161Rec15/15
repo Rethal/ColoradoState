@@ -1,0 +1,117 @@
+
+CS161 FINAL REVIEW
+
+
+1.  Loop Invariants.
+
+Consider the following snippet of code that computes the quotient of x and y (x / y) and the remainder obtained by dividing x by y (x % y):
+
+int r = x;
+int q = 0;
+while (y <= r) {
+   r = r - y;
+   q = 1 + q;
+}
+
+Use loop invariants to show that this code computes the quotient and remainder correctly.
+
+initial assumptions: x>0, y>0
+
+LI: x = q*y+r
+
+Case 1: x == q*y+r and not(y<=r)
+
+Case 2: total subtracted amount = q*y
+
+Case 3: y > r
+when loop finishes x = g*y+r
+
+x=7 y=3
+        r q  x y
+        7 0  7 3
+(7)-(3)=4 1  7 3
+(4)-(3)=1 2  7 3 <stop
+
+2.  Sorting.  
+
+a.  Apply Insertion Sort / Selection Sort / Bubble Sort to the following array of numbers. Show the numbers after each iteration of the outer loop.
+
+6 9 3 8 10 1
+
+Insertion:
+1: 6 9 3 8 10 1
+2: 6 9 3 8 10 1
+3: 3 6 9 8 10 1
+4: 3 6 8 9 10 1
+5: 3 6 8 9 10 1
+6: 1 3 6 8 9 10
+Selection:
+1: 1 6 9 3 8 10
+2: 1 3 6 9 8 10
+3: 1 3 6 9 8 10
+4: 1 3 6 8 9 10
+5: 1 3 6 8 9 10
+6: 1 3 6 8 9 10
+Bubble:
+1: 6 3 9 8 10 1
+2: 6 3 8 9 1 10
+3: 3 6 8 1 9 10
+4: 3 6 1 8 9 10
+5: 3 1 6 8 9 10
+6: 1 3 6 8 9 10
+
+b.  What do the methods have in common in terms of making progress in sorting an array?
+
+    What is the difference between the loop invariant of selection sort and the loop invariant of insertion sort?
+
+c.  You are writing a class called Student that stores student information.  You would like to sort an array of Student objects, and someone gave you a method for sorting that has the signature public void sort(Comparable [] array).  What do you need to do in order to use this method to sort the Student objects using this method?
+
+d.  How would you modify each of the sorting algorithms to sort in decreasing order?  If you are sorting an object that implements Comparable, and you have access to the implementation, can you do it without changing the algorithm itself?
+
+
+3.  Write an interface called CurrencyConversionInterface that provides functionality for currency conversion from one currency to another.  Assume that a currency is represented by a String which is the name of the currency.  Document what each method in the interface should do.
+
+
+4.  Inheritance
+
+Let's consider a Java class that represents a Rectangle class and a Square class that inherits from it.
+
+a.  Why did we choose Rectangle as the parent class?  Why not choose Square as the parent? Finish the constructor for Square, and the area methods for both Rectangle and Square.
+    
+b.  What must you do to  implement area for square? 
+
+c.  Can you assign a rectangle to a square? Can you assign a square to a rectangle? What needs to be done in cases, where you cannot do the assignment?
+
+
+public class Rectangle {
+   private int x, y;
+   private int width, height;
+        
+   public Rectangle(int height, int width, int x, int y) {
+      this.x = x;
+      this.y = y;
+      this.height = height;
+      this.width = width;
+   }
+
+   public int area(){
+
+   }
+}
+
+public class Square extends Rectangle {
+   public Square (int width, int x, int y) {
+
+
+
+
+
+
+   }
+
+
+   public int area(){
+
+   }
+}
+

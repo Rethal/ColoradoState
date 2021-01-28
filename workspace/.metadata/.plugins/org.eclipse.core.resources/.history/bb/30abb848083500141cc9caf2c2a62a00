@@ -1,0 +1,168 @@
+//Brenton Grundman
+//L05
+import java.util.Arrays;
+import java.util.Scanner;
+
+
+public class Lab1 {
+
+	// BEGIN PART 1
+
+	/**
+	 * Test if x is divisible by 3
+	 * @param x integer to test
+	 * @return true if x is divisible by 3
+	 */
+
+	public boolean isDivisibleBy3(int x)
+	{
+		if (x%3==0){
+			return true;
+		}
+		else return false;		
+	}
+
+	/**
+	 * Test if x is divisible by 5
+	 * @param x integer to test
+	 * @return true if x is divisible by 5
+	 */
+	public boolean isDivisibleBy5(int x)
+	{
+
+		if (x%5==0){
+			return true;
+		}
+		else return false;	
+	}
+
+	/**
+	 * Use helper functions isDivisibleBy3() and isDivisibleBy5() to implement.
+	 *
+	 * @param x integer to see if it divisible by 3, 5, or both
+	 * @return "is divisible by 3" if x is divisible by 3, "is divisible by 5" if divisible by 5,
+	 *          or "is divisible by 3 and 5" if divisible by 3 and 5
+	 */
+
+	public String testDivisors(int x)
+	{
+
+		Lab1 lab = new Lab1();
+		if (lab.isDivisibleBy3(x) == true){
+			if (lab.isDivisibleBy5(x) == true){
+				return " is divisible by 3 and 5";
+			}
+			else return " is divisible by 3";
+		}
+		else if (lab.isDivisibleBy5(x)==true){
+			return " is divisible by 5";
+		}
+		else return "";
+	}
+
+	/**
+	 * Print i and the result of testDivisors for all i such that first <= i <= last
+	 *
+	 * Example:
+	 * 1
+	 * 2
+	 * 3 "is divisible by 3"
+	 * 4
+	 * 5 "is divisible by 5"
+	 * ...
+	 * 15 "is divisible by 3 and 5"
+	 *
+	 * @param first integer to start the test range, inclusive
+	 * @param last integer to end the test range, inclusive
+	 */
+
+	public void testRange(int first, int last)
+	{
+		Lab1 lab = new Lab1();
+		int x=first;
+		for (int i=first;i<=last;i++){
+			lab.testDivisors(x);			
+			System.out.println(x+testDivisors(x));
+			x++;
+		}
+
+	}
+
+	// END PART 1
+
+
+	// BEGIN PART 2
+
+	/**
+	 * Extract all positive integers from the intArray.
+	 * Returned array is exactly as long as the number of positive integers in values.
+	 * @param intArray containing all the numbers
+	 * @return array containing all of the positive integers in values.
+	 */
+
+	public int[] extractPositives(int[] intArray)
+	{
+		//System.out.println("extractPositives NOT IMPLEMENTED");
+		int length = intArray[].length;
+		for(int i=0;i < length;i++)
+		return new int[0];
+	}
+
+	// END PART 2
+
+
+	// BEGIN PART 3
+
+	/**
+	 * Read in data from a file, print out the data in the specified format -
+	 *    "Name: *name*, Age:*age*" and then print out all of the names in a row.
+	 *
+	 * @param filename string
+	 */
+	public void readAndPrint(String filename)
+	{
+		System.out.println("readFromFile NOT IMPLEMENTED");
+	}
+
+
+	// END PART 3
+
+
+
+	public static void main(String[] args)
+	{
+		Lab1 lab = new Lab1();
+		System.out.print("Input lower boundary: ");
+		Scanner scan = new Scanner(System.in);
+		int first = 0;
+		int last = 0;
+		if (scan.hasNextInt()){
+			first = scan.nextInt();
+		}
+		else {
+			System.out.println("There is no integer here.");
+			System.exit(0);
+
+		}
+		System.out.print("Input upper boundary: ");
+		if (scan.hasNextInt()){
+			last = scan.nextInt();
+		}
+		else {
+			System.out.println("There is no integer here.");
+			System.exit(0);
+		}
+		lab.testRange(first, last);
+		//Prompt user for first and last
+
+		System.out.println("Part 2 NOT IMPLEMENTED");
+		//Use command line arguments as a data source
+		//read in the file, create the array
+		System.out.println(Arrays.toString(lab.extractPositives(values)));
+
+		System.out.println("Part 3 NOT IMPLEMENTED");
+		//Use the same command line arguments as a data source
+		//	lab.readAndPrint(args[1]);
+	}
+
+}
